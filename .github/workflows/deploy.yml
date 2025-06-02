@@ -4,7 +4,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Mude para 'master' ou sua branch principal, se for diferente
+      - main # Mude para 'master' ou sua branch principal, se for diferente
 
 # Define permissões para o job de deploy poder interagir com o GitHub Pages
 permissions:
@@ -28,16 +28,23 @@ jobs:
       - name: Replace API Key Placeholder
         # Certifique-se que o nome do segredo 'OPENROUTER_API_KEY_FOR_PAGES' é o mesmo do Passo 3
         run: |
-          echo "Attempting to replace placeholder in ia_logic.js"
-          if [ -f "ia_logic.js" ]; then
-            sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" ia_logic.js
-            echo "Placeholder replacement done."
+          echo "Attempting to replace placeholder in js/ia_logic.js"
+          # Verifica se o arquivo existe no caminho js/ia_logic.js
+          if [ -f "js/ia_logic.js" ]; then
+            # Substitui o placeholder no arquivo localizado em js/ia_logic.js
+            sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" js/ia_logic.js
+            echo "Placeholder replacement done in js/ia_logic.js."
           else
-            echo "Error: ia_logic.js not found!"
+            echo "Error: js/ia_logic.js not found!"
+            # Lista os arquivos na pasta js para ajudar na depuração
+            echo "Files in js/ directory:"
+            ls -la js/
+            # Lista os arquivos na raiz para ajudar na depuração
+            echo "Files in root directory:"
+            ls -la ./
             exit 1
           fi
-        # MUITO IMPORTANTE: Substitua "seu_arquivo_javascript.js" acima pelo caminho correto para o seu arquivo.
-        # Exemplo: se estiver em uma pasta 'js', seria 'js/script.js'
+        # MUITO IMPORTANTE: O caminho "js/ia_logic.js" foi corrigido.
 
       - name: Setup Pages
         uses: actions/configure-pages@v5 # Ação para configurar o GitHub Pages
