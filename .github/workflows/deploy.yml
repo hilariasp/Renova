@@ -26,12 +26,11 @@ jobs:
         uses: actions/checkout@v4 # Ação para baixar o código do seu repositório
 
       - name: Replace API Key Placeholder
-        # Substitua 'seu_arquivo_javascript.js' pelo caminho e nome real do seu arquivo JS
         # Certifique-se que o nome do segredo 'OPENROUTER_API_KEY_FOR_PAGES' é o mesmo do Passo 3
         run: |
-          echo "Attempting to replace placeholder in seu_arquivo_javascript.js"
+          echo "Attempting to replace placeholder in ia_logic.js"
           if [ -f "ia_logic.js" ]; then
-            sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" seu_arquivo_javascript.js
+            sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" ia_logic.js
             echo "Placeholder replacement done."
           else
             echo "Error: ia_logic.js not found!"
