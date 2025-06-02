@@ -1,0 +1,53 @@
+name: Deploy to GitHub Pages
+
+# Dispara o workflow em pushes para a branch 'main'
+on:
+  push:
+    branches:
+      - main  # Mude para 'master' ou sua branch principal, se for diferente
+
+# Define permissões para o job de deploy poder interagir com o GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    # Se você usou um "Environment Secret" no Passo 3A e criou um ambiente chamado 'github-pages'
+    environment:
+      name: github-pages # Certifique-se que este é o nome do ambiente que você criou
+      url: ${{ steps.deployment.outputs.page_url }} # Define a URL de deploy após o sucesso
+
+    runs-on: ubuntu-latest # Usa a última versão estável do Ubuntu como ambiente de execução
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Ação para baixar o código do seu repositório
+
+      - name: Replace API Key Placeholder
+        # Substitua 'seu_arquivo_javascript.js' pelo caminho e nome real do seu arquivo JS
+        # Certifique-se que o nome do segredo 'OPENROUTER_API_KEY_FOR_PAGES' é o mesmo do Passo 3
+        run: |
+          echo "Attempting to replace placeholder in seu_arquivo_javascript.js"
+          if [ -f "seu_arquivo_javascript.js" ]; then
+            sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" seu_arquivo_javascript.js
+            echo "Placeholder replacement done."
+          else
+            echo "Error: seu_arquivo_javascript.js not found!"
+            exit 1
+          fi
+        # MUITO IMPORTANTE: Substitua "seu_arquivo_javascript.js" acima pelo caminho correto para o seu arquivo.
+        # Exemplo: se estiver em uma pasta 'js', seria 'js/script.js'
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5 # Ação para configurar o GitHub Pages
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # Ação para empacotar os arquivos do site
+        with:
+          path: '.' # Envia todo o conteúdo do repositório (ajuste se necessário)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Ação para fazer o deploy no GitHub Pages
