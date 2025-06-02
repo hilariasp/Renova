@@ -30,11 +30,11 @@ jobs:
         # Certifique-se que o nome do segredo 'OPENROUTER_API_KEY_FOR_PAGES' é o mesmo do Passo 3
         run: |
           echo "Attempting to replace placeholder in seu_arquivo_javascript.js"
-          if [ -f "seu_arquivo_javascript.js" ]; then
+          if [ -f "ia_logic.js" ]; then
             sed -i "s|%%OPENROUTER_API_KEY_PLACEHOLDER%%|${{ secrets.OPENROUTER_API_KEY_FOR_PAGES }}|g" seu_arquivo_javascript.js
             echo "Placeholder replacement done."
           else
-            echo "Error: seu_arquivo_javascript.js not found!"
+            echo "Error: ia_logic.js not found!"
             exit 1
           fi
         # MUITO IMPORTANTE: Substitua "seu_arquivo_javascript.js" acima pelo caminho correto para o seu arquivo.
