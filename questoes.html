@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz - RenovaIA</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+       body { font-family: "Poppins", sans-serif; background-color: #f5f6fa; color: #2f3640; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+      .logo { margin-bottom: 20px; }
+      .logo img { width: 120px; height: auto; }
+      h1 { text-align: center; color: #4361ee; margin-bottom: 20px; }
+      .quiz-container { width: 100%; max-width: 800px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+      .quiz-title { text-align: center; margin-bottom: 30px; color: #4361ee; font-size: 24px; }
+      .pergunta { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+      .pergunta:last-child { border-bottom: none; }
+      .enunciado { font-weight: 500; margin-bottom: 15px; font-size: 18px; }
+      .opcoes { display: flex; flex-direction: column; gap: 10px; }
+      .opcao { display: flex; align-items: center; gap: 10px; }
+      .opcao input { width: auto; } /* Resetting width for radio/checkbox */
+      .opcao label { margin-bottom: 0; cursor: pointer; font-weight: normal; } /* Ensure label is clickable and normal weight */
+      input[type="text"].aberta { width: 100%; padding: 12px; border: 1px solid #dcdde1; border-radius: 8px; font-size: 15px; box-sizing: border-box; }
+      button { width: 100%; background-color: #4361ee; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease; margin-top: 20px; }
+      button:hover { background-color: #3a56d4; }
+      button:disabled { background-color: #ccc; cursor: not-allowed;}
+      .back-link { display: block; text-align: center; margin-top: 20px; text-decoration: none; color: #4361ee; }
+      .back-link:hover { text-decoration: underline; }
+      .loading { display: inline-block; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="logo">
+      <img src="img/2.png" alt="Logo RenovaIA"> </div>
+  <div class="quiz-container">
+    <h2 id="quizTitle" class="quiz-title">Carregando Quiz...</h2>
+
+    <form id="quizForm"> <input type="hidden" id="quizJsonData" name="quiz_json_data_for_submission"> <div id="quizQuestionsContainer">
+        </div>
+      
+      <button type="submit" id="submitQuizBtn">
+        <i class="bi bi-check-circle"></i> Enviar Respostas
+      </button>
+    </form>
+
+    <a href="chatbot.html" class="back-link"> <i class="bi bi-arrow-left-circle"></i> Voltar ao chat
+    </a>
+  </div>
+
+  <script src="js/ia_logic.js"></script>
+  <script src="js/app.js"></script>
+  </body>
+</html>

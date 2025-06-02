@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>RenovaIA</title>
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --primary-dark: #3a56d4;
+      --sidebar-bg: #1f2937;
+      --chat-bg: #2a3242;
+      --input-bg: #1f2937;
+      --user-message: #4cc9f0;
+      --bot-message: #e5e7eb;
+      --text-light: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-radius: 40px;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: white;
+      min-height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text-light);
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 300px;
+      background-color: var(--sidebar-bg);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      transition: var(--transition);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .header-logo {
+      width: 180px;
+      transition: var(--transition);
+    }
+
+    .new-chat {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .new-chat:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .chat {
+      flex: 1;
+      background-color: var(--chat-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .messages {
+      padding: 30px 80px;
+      overflow-y: auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 18px 24px;
+      border-radius: var(--border-radius);
+      line-height: 1.6;
+      position: relative;
+      animation: fadeIn 0.3s ease-out;
+      word-wrap: break-word; /* Added for long messages */
+    }
+
+    .input-wrapper {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .input-container {
+      padding: 20px 80px;
+      background-color: var(--sidebar-bg);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .personality-selector select {
+      padding: 12px;
+      border-radius: var(--border-radius);
+      background-color: var(--input-bg);
+      box-shadow: var(--shadow);
+      color: var(--text-light);
+      border: 1px solid var(--input-bg);
+      font-family: "Poppins", sans-serif;
+      outline: none;
+      min-width: 150px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .personality-selector select:hover {
+      border-color: var(--primary-color);
+      /* border: 1px solid; remove this line as border-color above is enough */
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      .input-container {
+        padding: 15px;
+      }
+
+      .input-wrapper {
+        flex-direction: column;
+      }
+
+      .personality-selector select {
+        width: 100%;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background-color: var(--primary-color);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background-color: var(--input-bg);
+      color: var(--bot-message);
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-indicator {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-muted);
+      border-radius: 50%;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingAnimation {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* .input-container is already defined above */
+
+    .input-box {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      background-color: var(--input-bg);
+      border-radius: var(--border-radius);
+      padding: 5px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-box input {
+      height: 60px;
+      padding: 0 15px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      background-color: transparent;
+      color: var(--text-light);
+      outline: none;
+    }
+
+    .input-box input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .send-button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 30px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .send-button:hover {
+      color: var(--primary-color);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      text-align: right; /* Default for user, bot can override if needed */
+    }
+    .message.bot .timestamp {
+        text-align: left;
+    }
+
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #4b5563;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6b7280;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 15px;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        justify-content: space-around; /* Better for row layout */
+      }
+
+      .logo {
+        padding: 0;
+        flex-grow: 1; /* Allow logo to take some space */
+      }
+
+      .header-logo {
+        width: 120px;
+      }
+
+      .new-chat {
+        padding: 10px 15px;
+        font-size: 14px;
+        flex-shrink: 0; /* Prevent buttons from shrinking too much */
+      }
+
+      .messages {
+        padding: 20px;
+      }
+
+      /* .input-container is already responsive via its parent */
+      
+      .message {
+        max-width: 90%;
+        padding: 14px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html"><img src="img/2.png" alt="Logo RenovaIA" class="header-logo" /></a> </div>
+      <a href="chatbot.html" class="new-chat"> <i class="bi bi-plus-lg"></i> Novo Chat
+      </a>
+      <a href="quiz.html" class="new-chat"> <i class="bi bi-journal-text"></i> Gerar Quiz
+      </a>
+    </aside>
+    <main class="chat">
+      <div class="messages" id="messages">
+        </div>
+      <div class="input-container">
+        <div class="input-wrapper">
+          <div class="personality-selector">
+            <select id="personality">
+              <option value="padrao">Padrão</option>
+              <option value="palhaco">Palhaço</option>
+              <option value="fofoqueira">Fofoqueira</option>
+              <option value="professor">Professor</option>
+              <option value="crianca">Criança</option>
+              <option value="filosofo">Filósofo</option>
+              <option value="tio_pave">Tio do Pavê</option>
+              <option value="sarcastico">Sarcástico</option>
+              <option value="malandro">Malandro</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <input type="text" id="userInput" placeholder="Escreva sua mensagem..." autocomplete="off" />
+            <button class="send-button" onclick="handleSendMessage()"> <i class="bi bi-arrow-up-circle-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/ia_logic.js"></script>
+  <script src="js/app.js"></script>
+  </body>
+</html>
