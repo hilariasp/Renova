@@ -1,5 +1,5 @@
 // js/ia_logic.js
-let openRouterApiKey = "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";
+let openRouterApiKey = "%%OPENROUTER_API_KEY_PLACEHOLDER%%";
 
 // Função para verificar e solicitar chave API se necessário
 function ensureApiKey() {
