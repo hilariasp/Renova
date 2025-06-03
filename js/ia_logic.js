@@ -1,5 +1,5 @@
 // js/ia_logic.js
-let openRouterApiKey = "%%OPENROUTER_API_KEY_PLACEHOLDER%%";
+let openRouterApiKey = "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";
 
 // Função para verificar e solicitar chave API se necessário
 function ensureApiKey() {
@@ -214,7 +214,7 @@ async function loadExternalJsonContext(filePath = 'dados_extras.json') {
 }
 
 
-async function callOpenRouterAPI(promptText, apiKey, model = "openai/gpt-3.5-turbo", maxTokens = 1500, temperature = 1.0) {
+async function callOpenRouterAPI(promptText, apiKey, model = "openai/gpt-3.5-turbo", maxTokens = 2500, temperature = 1.0) {
     // ... (código existente sem alterações)
     console.log("Chamando OpenRouter API com:", { model, maxTokens, temperature });
     console.log("Prompt:", promptText.substring(0, 100) + "...");

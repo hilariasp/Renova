@@ -1,11 +1,381 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Renova - IA para Energia Eólica</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variáveis para cores e estilos consistentes */
+        :root {
+            --primary: #043873;
+            --primary-dark: #0b4f9e;
+            --secondary: #0e5ab1;
+            --accent: #ffd166;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f9fbfd;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header moderno */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .chat-btn {
+
+            color: var(--dark);
+            border: none;
+            padding: 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-btn:hover {
+
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Hero section aprimorada */
+        .hero {
+            padding: 100px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 35px;
+            color: var(--gray);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(135deg, rgba(22, 82, 70, 0.08), rgba(41, 187, 137, 0.1));
+            border-radius: 30% 0 0 60%;
+            z-index: 0;
+        }
+
+        .hero-img {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 500px;
+            z-index: 1;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+        }
+
+        /* Seção de recursos */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .feature-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        /* Seção de chamada */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            margin: 100px 0;
+            border-radius: var(--radius);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            background: #ffc44d;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Footer moderno */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+        }
+
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-img {
+                width: 40%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 0 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-img {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                margin: 40px auto 0;
+                top: 0;
+                right: 0;
+                transform: none;
+            }
+
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .hero-bg {
+                display: none;
+            }
+        }
+
+        /* Animação sutil */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
 </head>
+
 <body>
     <header>
     <div class="container">
@@ -20,64 +390,104 @@
                 <li><a href="index.html">Início</a></li>
                 <li><a href="recurso.html">Recursos</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="chatbot.html" class="chat-btn">Chat IA</a></li>
+                <li><a href="chatbot.html" class="chat-btn" style="color: rgb(194, 215, 255);">Experimente</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-    <main class="container">
-        <div class="hero">
-            <h1>Renova - IA para Energia Eólica</h1>
-            <p>Transformando o futuro da energia renovável com inteligência artificial avançada</p>
-            <button class="chat-btn">Converse com a Renova</button>
-        </div>
-        
-        <h2>Por que escolher a Renova?</h2>
-        <p>Nossa inteligência artificial especializada em energia eólica oferece soluções inovadoras para otimizar a produção, manutenção e distribuição de energia renovável.</p>
-        
-        <div class="features">
-            <div class="feature-card">
-                <h3>Otimização de Turbinas</h3>
-                <p>Algoritmos avançados que analisam dados em tempo real para maximizar a eficiência de cada turbina eólica.</p>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content animate">
+                    <h1>Explorando a Energia Eólica com IA</h1>
+                    <p>Usamos a Inteligência Artificial para ensinar sobre a energia eólica de forma fácil e acessível
+                        para todos.</p>
+                    <a href="chatbot.html" class="chat-btn animate delay-1"
+                        style="display: inline-flex; background-color: #0b4f9e; color: white; text-decoration: none; padding: 20px;">
+                        <i class="fas fa-comment-dots"></i> Converse com a RenovaIA
+                    </a>
+                </div>
             </div>
-            <div class="feature-card">
-                <h3>Previsão de Geração</h3>
-                <p>Previsões precisas de geração de energia com base em condições meteorológicas e desempenho histórico.</p>
+        </section>
+
+        <section class="container">
+            <div class="section-title animate">
+                <h2>Por que usar a RenovaIA?</h2>
             </div>
-            <div class="feature-card">
-                <h3>Manutenção Preditiva</h3>
-                <p>Detecção antecipada de possíveis falhas e recomendações de manutenção preventiva.</p>
+
+            <div class="features">
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Aprendizado Facilitado</h3>
+                        <p>Explicações claras sobre como a energia eólica funciona, desde o movimento do vento até a
+                            geração de eletricidade, com exemplos práticos.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Conteúdo para Estudantes</h3>
+                        <p>Respostas baseadas em fontes confiáveis com linguagem acessível para quem está começando ou
+                            quer se aprofundar em energia renovável.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Dados Atualizados</h3>
+                        <p>Informações constantemente atualizadas para garantir análises precisas e recomendações
+                            relevantes.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        </section>
     </main>
 
     <footer>
-        <div class="container">
-            <ul class="footer-links">
-                <li><a href="index.html" class="active">Início</a></li>
-                <li><a href="recursos.html">Recursos</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-            
-            <div class="social-links">
-                <a href="#">📱</a>
-                <a href="#">💻</a>
-                <a href="#">📘</a>
-                <a href="#">🐦</a>
-                <a href="#">📸</a>
-            </div>
-            
-            <p>&copy; 2023 Renova IA. Todos os direitos reservados.</p>
-        </div>
+        <p style="text-align: center;">&copy; 2025 Renova IA. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        document.getElementById('chat-btn').addEventListener('click', function() {
-            alert('Chat com a IA Renova será aberto em breve!');
+        // Animação de scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const animatedElements = document.querySelectorAll('.animate');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                observer.observe(element);
+            });
+
+            // Botão do chat
+            document.querySelectorAll('.chat-btn, .cta-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    if (!e.target.href) {
+                        e.preventDefault();
+                        alert('Chat com a IA Renova será aberto em breve!');
+                    }
+                });
+            });
         });
     </script>
 </body>
+
 </html>

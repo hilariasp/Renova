@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,8 @@
   <title>RenovaIA</title>
   <style>
     :root {
-      --primary-color: #4361ee;
-      --primary-dark: #3a56d4;
+      --primary-color: #054997;
+      --primary-dark: #0b4f9e;
       --sidebar-bg: #1f2937;
       --chat-bg: #2a3242;
       --input-bg: #1f2937;
@@ -112,7 +113,8 @@
       line-height: 1.6;
       position: relative;
       animation: fadeIn 0.3s ease-out;
-      word-wrap: break-word; /* Added for long messages */
+      word-wrap: break-word;
+      /* Added for long messages */
     }
 
     .input-wrapper {
@@ -277,10 +279,12 @@
       font-size: 12px;
       color: var(--text-muted);
       margin-top: 5px;
-      text-align: right; /* Default for user, bot can override if needed */
+      text-align: right;
+      /* Default for user, bot can override if needed */
     }
+
     .message.bot .timestamp {
-        text-align: left;
+      text-align: left;
     }
 
 
@@ -314,12 +318,14 @@
         flex-direction: row;
         align-items: center;
         gap: 15px;
-        justify-content: space-around; /* Better for row layout */
+        justify-content: space-around;
+        /* Better for row layout */
       }
 
       .logo {
         padding: 0;
-        flex-grow: 1; /* Allow logo to take some space */
+        flex-grow: 1;
+        /* Allow logo to take some space */
       }
 
       .header-logo {
@@ -329,7 +335,8 @@
       .new-chat {
         padding: 10px 15px;
         font-size: 14px;
-        flex-shrink: 0; /* Prevent buttons from shrinking too much */
+        flex-shrink: 0;
+        /* Prevent buttons from shrinking too much */
       }
 
       .messages {
@@ -337,7 +344,7 @@
       }
 
       /* .input-container is already responsive via its parent */
-      
+
       .message {
         max-width: 90%;
         padding: 14px 18px;
@@ -345,11 +352,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <aside class="sidebar">
       <div class="logo">
-        <a href="index.html"><img src="img/2.png" alt="Logo RenovaIA" class="header-logo" /></a> </div>
+        <a href="index.html"><img src="img/2.png" alt="Logo RenovaIA" class="header-logo" />
+      </div>
       <a href="chatbot.html" class="new-chat"> <i class="bi bi-plus-lg"></i> Novo Chat
       </a>
       <a href="quiz.html" class="new-chat"> <i class="bi bi-journal-text"></i> Gerar Quiz
@@ -357,7 +366,7 @@
     </aside>
     <main class="chat">
       <div class="messages" id="messages">
-        </div>
+      </div>
       <div class="input-container">
         <div class="input-wrapper">
           <div class="personality-selector">
@@ -385,5 +394,6 @@
 
   <script src="js/ia_logic.js"></script>
   <script src="js/app.js"></script>
-  </body>
+</body>
+
 </html>

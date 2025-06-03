@@ -5,6 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos - Renova IA</title>
     <link rel="stylesheet" href="css/recurso.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+         /* Resource Cards */
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 0 80px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(14, 90, 177, 0.1);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(14, 90, 177, 0.3);
+        }
+
+        .resource-img {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .resource-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .resource-content p {
+            margin-bottom: 20px;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #444;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+
+
+    </style>
 </head>
 <body>
    <header>
@@ -20,88 +107,77 @@
                 <li><a href="index.html">Início</a></li>
                 <li><a href="recurso.html">Recursos</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><button class="chat-btn">Chat IA</button></li>
+                <li><a href="chatbot.html" class="chat-btn" style="color: rgb(194, 215, 255);">Experimente</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-    <main class="container">
-        <h1>Recursos da Renova</h1>
-        <p>Explore os recursos avançados de nossa plataforma de IA para energia eólica.</p>
-        
+        <main class="container">
         <div class="resource-list">
             <div class="resource-card">
-                <div class="resource-img">Análise em Tempo Real</div>
+                <div class="resource-img">
+                    <i class="fas fa-comments"></i>
+                </div>
                 <div class="resource-content">
-                    <h3>Monitoramento 24/7</h3>
-                    <p>Coleta e análise contínua de dados de desempenho de turbinas eólicas em tempo real.</p>
+                    <h3>Respostas Inteligentes</h3>
+                    <p>Pergunte qualquer coisa sobre energia eólica — de conceitos básicos a temas mais avançados — e receba explicações claras e diretas em linguagem acessível.</p>
+                    <ul class="feature-list">
+                        <li>Explicações técnicas simplificadas</li>
+                        <li>Dados atualizados do setor</li>
+                    </ul>
                 </div>
             </div>
+            
             <div class="resource-card">
-                <div class="resource-img">Relatórios Inteligentes</div>
+                <div class="resource-img">
+                    <i class="fas fa-chart-line"></i>
+                </div>
                 <div class="resource-content">
-                    <h3>Dashboard Personalizado</h3>
-                    <p>Visualizações intuitivas e relatórios personalizados para tomada de decisão informada.</p>
+                    <h3>Explicações Passo a Passo</h3>
+                    <p>Entenda o funcionamento das turbinas, a conversão do vento em eletricidade, os benefícios ambientais e muito mais.</p>
+                    <ul class="feature-list">
+                        <li>Exemplos práticos</li>
+                    </ul>
                 </div>
             </div>
+            
             <div class="resource-card">
-                <div class="resource-img">Integração</div>
+                <div class="resource-img">
+                    <i class="fas fa-gamepad"></i>
+                </div>
                 <div class="resource-content">
-                    <h3>API Aberta</h3>
-                    <p>Integração fácil com sistemas existentes através de nossa API documentada.</p>
+                    <h3>Quiz Interativo</h3>
+                    <p>Teste seus conhecimentos com quizzes personalizados sobre energia eólica. Aprenda brincando e acompanhe seu progresso com nosso sistema de pontuação.</p>
+                    <ul class="feature-list">
+                        <li>Diferentes níveis de dificuldade</li>
+                        <li>Pontuação de desempenho</li>
+                    </ul>
+                    
                 </div>
             </div>
+            
             <div class="resource-card">
-                <div class="resource-img">Aprendizado Contínuo</div>
-                <div class="resource-content">
-                    <h3>Machine Learning Adaptativo</h3>
-                    <p>Nossos modelos melhoram continuamente com o fluxo de novos dados.</p>
+                <div class="resource-img">
+                    <i class="fas fa-user-astronaut"></i>
                 </div>
-            </div>
-            <div class="resource-card">
-                <div class="resource-img">Segurança</div>
                 <div class="resource-content">
-                    <h3>Proteção de Dados</h3>
-                    <p>Criptografia de ponta a ponta e conformidade com os mais altos padrões de segurança.</p>
-                </div>
-            </div>
-            <div class="resource-card">
-                <div class="resource-img">Suporte</div>
-                <div class="resource-content">
-                    <h3>Assistência Técnica</h3>
-                    <p>Equipe especializada disponível para auxiliar na implementação e solução de problemas.</p>
+                    <h3>Respostas com Personalidades</h3>
+                    <p>Faça perguntas para a personalidade que você mais ama. Personalize sua experiência de aprendizado com diferentes estilos de resposta.</p>
+                    <ul class="feature-list">
+                        <li>Personagens especializados</li>
+                        <li>Estilos de comunicação variados</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <ul class="footer-links">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="recurso.html" class="active">Recursos</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-            
-            <div class="social-links">
-                <a href="#">📱</a>
-                <a href="#">💻</a>
-                <a href="#">📘</a>
-                <a href="#">🐦</a>
-                <a href="#">📸</a>
-            </div>
-            
-            <p>&copy; 2023 Renova IA. Todos os direitos reservados.</p>
-        </div>
+  <footer>
+            <p>&copy; 2025 Renova IA. Todos os direitos reservados.</p>
     </footer>
-
     <script>
-        document.getElementById('chat-btn').addEventListener('click', function() {
-            alert('Chat com a IA Renova será aberto em breve!');
-        });
+       
     </script>
 </body>
 </html>
